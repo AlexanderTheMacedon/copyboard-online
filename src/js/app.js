@@ -104,34 +104,6 @@
     txt:['#f4f5f7','#6b7280'], md:['#f4f5f7','#6b7280'], rtf:['#f4f5f7','#6b7280'],
     svg:['#eaf1ff','#2f5bff'], ai:['#eaf1ff','#2f5bff'], psd:['#eaf1ff','#2f5bff'], fig:['#eaf1ff','#2f5bff'], sketch:['#eaf1ff','#2f5bff']
   };
-  function extOf(name){ const parts=(name||'').split('.'); return parts.length>1 ? parts.pop().toLowerCase() : ''; }
-  function extMeta(name){ const ext=extOf(name); const c=EXT_GROUPS[ext]||['#f4f5f7','#6b7280']; return {label: ext?ext.toUpperCase().slice(0,4):'FILE', bg:c[0], fg:c[1]}; }
-  function displayName(item){ return item.customName || item.name; }
-  function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
-  function fmtSize(bytes){ if(bytes<1024) return bytes+' B'; if(bytes<1024*1024) return (bytes/1024).toFixed(1)+' KB'; return (bytes/1024/1024).toFixed(1)+' MB'; }
-  function fmtTime(ts){
-    const diff=Date.now()-ts, min=Math.floor(diff/60000);
-    if(min<1) return 'gerade eben'; if(min<60) return 'vor '+min+' Min';
-    const h=Math.floor(min/60); if(h<24) return 'vor '+h+' Std';
-    const d=Math.floor(h/24); if(d<7) return 'vor '+d+' Tag'+(d>1?'en':'');
-    return new Date(ts).toLocaleDateString('de-DE');
-  }
-  function sanitizeFilename(name){ return (name||'Datei').replace(/[\\/:*?"<>|]+/g,'_').trim().slice(0,80) || 'Datei'; }
-  function exportFilename(item, used){
-    let base;
-    if(item.type === 'text'){ base = sanitizeFilename(displayName(item)) + '.txt'; }
-    else {
-      const ext = extOf(item.name);
-      const nameBase = sanitizeFilename(displayName(item));
-      base = (ext && !nameBase.toLowerCase().endsWith('.'+ext)) ? nameBase + '.' + ext : nameBase;
-    }
-    let final = base, i = 2;
-    while(used.has(final)){ const dot = base.lastIndexOf('.'); final = dot>0 ? base.slice(0,dot)+' ('+i+')'+base.slice(dot) : base+' ('+i+')'; i++; }
-    used.add(final);
-    return final;
-  }
-
-
   /*
    * V32 SETTINGS ARCHITECTURE
    * - SETTINGS_REGISTRY is the canonical definition list.
