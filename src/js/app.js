@@ -1,5 +1,20 @@
+import {
+  extOf,
+  extMeta,
+  displayName,
+  uid,
+  fmtSize,
+  fmtTime,
+} from './utils/format.js';
 
-  /*
+import {
+  sanitizeFilename,
+  exportFilename,
+} from './utils/files.js';
+
+import { showToast } from './ui/toast.js';
+
+/*
    * COPYBOARD SOURCE MAP
    * 01 Constants, DOM references and runtime state
    * 02 Schema normalization and import compatibility
@@ -791,7 +806,7 @@
   const clearBtn = document.getElementById('clearBtn');
   const addTextBtn = document.getElementById('addTextBtn');
   const emptyNote = document.getElementById('emptyNote');
-  const toast = document.getElementById('toast');
+
   const confirmOverlay = document.getElementById('confirmOverlay');
   const confirmTitle = document.getElementById('confirmTitle');
   const confirmMsg = document.getElementById('confirmMsg');

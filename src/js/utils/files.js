@@ -1,9 +1,11 @@
+import { extOf, displayName } from './format.js';
+
 /**
  * Filename and export helpers for CopyBoard.
  */
 
-function sanitizeFilename(name){ return (name||'Datei').replace(/[\\/:*?"<>|]+/g,'_').trim().slice(0,80) || 'Datei'; }
-  function exportFilename(item, used){
+export function sanitizeFilename(name){ return (name||'Datei').replace(/[\\/:*?"<>|]+/g,'_').trim().slice(0,80) || 'Datei'; }
+  export function exportFilename(item, used){
     let base;
     if(item.type === 'text'){ base = sanitizeFilename(displayName(item)) + '.txt'; }
     else {

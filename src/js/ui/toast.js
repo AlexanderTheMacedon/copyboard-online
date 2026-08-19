@@ -1,12 +1,21 @@
 /**
- * Global toast notification UI for CopyBoard.
+ * Toast notification UI for CopyBoard.
  */
 
-function showToast(msg){
-    toast.textContent = msg; toast.classList.add('show');
-    clearTimeout(showToast._t); showToast._t = setTimeout(()=>toast.classList.remove('show'), 1900);
+export function showToast(message) {
+  const toast = document.getElementById('toast');
+
+  if (!toast) {
+    console.warn('CopyBoard: Toast-Element nicht gefunden.', message);
+    return;
   }
 
-  // ================= V34.0 PERSONAL CLOUD SYNC =================
-  // The complete board remains a local-first snapshot. Realtime only announces
-  // a small revision row; the corresponding JSON snapshot is then downloaded.
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  clearTimeout(showToast._timer);
+
+  showToast._timer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 1900);
+}
