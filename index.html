@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>CopyBoard</title>
+<!-- CopyBoard V34.1: einheitliche Utility-Buttons für Einstellungen und Cloud-Sync. -->
 <!-- V26.0: Sortierung pro Space; manuelles Drag-Reordering bleibt im Modus „Manuell“. -->
 <!-- Version: v24 Undo & Redo -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234f6bff'/%3E%3Crect x='22' y='12' width='26' height='34' rx='6' fill='white' opacity='0.4'/%3E%3Crect x='14' y='20' width='26' height='34' rx='6' fill='white'/%3E%3C/svg%3E">
@@ -298,14 +299,20 @@
   .storage-row-action:hover{ background:var(--accent-soft); color:var(--accent); }
   .storage-row-action.delete:hover{ background:#fdecec; color:var(--danger); }
   .storage-row-action:active{ transform:scale(.92); }
-  #helpToggle{
+  #helpToggle,
+  #cloudToggle{
     position:fixed; bottom:26px; left:26px; z-index:75;
     width:46px; height:46px; border-radius:50%; border:none; cursor:pointer;
     background:rgba(255,255,255,.94); color:var(--muted);
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 14px 34px rgba(0,0,0,.4); transition:background .2s, color .2s, box-shadow .2s, transform .15s;
   }
-  #helpToggle:hover{ transform:translateY(-1px); background:var(--accent-soft); color:var(--accent); }
+  #helpToggle:hover,
+  #cloudToggle:hover{ transform:translateY(-1px); background:var(--accent-soft); color:var(--accent); }
+  #helpToggle:focus-visible,
+  #cloudToggle:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; box-shadow:0 14px 34px rgba(0,0,0,.4); }
+  #helpToggle svg,
+  #cloudToggle svg{ width:20px; height:20px; flex:0 0 auto; }
 
   .selection-bar{
     position:fixed; top:104px; left:50%; transform:translate(-50%, -12px);
@@ -1081,19 +1088,17 @@
     .tabs{ max-width:80vw; }
   }
 
-  /* V34.0 — personal cloud sync shell */
+  /* V34.1 — cloud sync uses the shared utility-button geometry */
   #cloudToggle{
-    position:fixed; bottom:26px; left:72px; z-index:75; width:38px; height:38px;
-    border:none; border-radius:50%; background:rgba(244,245,251,.92); color:var(--ink);
-    display:flex; align-items:center; justify-content:center; cursor:pointer;
-    box-shadow:0 12px 30px rgba(0,0,0,.34); transition:var(--control-transition);
+    left:80px;
   }
-  #cloudToggle:hover{transform:translateY(-1px);background:var(--accent-soft);color:var(--accent)}
-  #cloudToggle[data-state="synced"]{background:#e9f8ef;color:#16845a}
-  #cloudToggle[data-state="syncing"]{background:#eef1ff;color:var(--accent)}
-  #cloudToggle[data-state="attention"]{background:#fff2e0;color:#b76508}
-  #cloudToggle[data-state="error"]{background:#fdecec;color:var(--danger)}
-  #cloudToggle .cloud-dot{position:absolute;right:1px;bottom:1px;width:9px;height:9px;border-radius:50%;background:#8b909c;border:2px solid #fff}
+  #cloudToggle[data-state="local"],
+  #cloudToggle[data-state="offline"]{color:var(--muted)}
+  #cloudToggle[data-state="synced"]{color:#16845a}
+  #cloudToggle[data-state="syncing"]{color:var(--accent)}
+  #cloudToggle[data-state="attention"]{color:#b76508}
+  #cloudToggle[data-state="error"]{color:var(--danger)}
+  #cloudToggle .cloud-dot{position:absolute;right:2px;bottom:2px;width:10px;height:10px;border-radius:50%;background:#8b909c;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.22)}
   #cloudToggle[data-state="synced"] .cloud-dot{background:#22b07d}
   #cloudToggle[data-state="syncing"] .cloud-dot{background:var(--accent)}
   #cloudToggle[data-state="attention"] .cloud-dot{background:#f5a623}
@@ -1114,7 +1119,7 @@
   #cloudUpdateBanner span{font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   #cloudUpdateBanner button{border:none;border-radius:999px;background:var(--accent);color:#fff;padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer}
   #cloudUpdateDismiss{background:#f0f1f4!important;color:var(--muted)!important;padding:7px 9px!important}
-  @media (max-width:520px){#cloudToggle{left:70px}#cloudUpdateBanner{top:122px}#cloudUpdateBanner span{white-space:normal}}
+  @media (max-width:520px){#cloudToggle{left:80px}#cloudUpdateBanner{top:122px}#cloudUpdateBanner span{white-space:normal}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -1209,12 +1214,12 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A4.5 4.5 0 0 0 5 6.5v.09A3.5 3.5 0 0 0 3 9.9v.2A3.5 3.5 0 0 0 5 13.5v.5A4 4 0 0 0 9 18h.5a1 1 0 0 0 1-1V4a2 2 0 0 0-1-2Z"/><path d="M14.5 2A4.5 4.5 0 0 1 19 6.5v.09A3.5 3.5 0 0 1 21 9.9v.2a3.5 3.5 0 0 1-2 3.4v.5a4 4 0 0 1-4 4h-.5a1 1 0 0 1-1-1V4a2 2 0 0 1 1-2Z"/><path d="M9 18v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2"/></svg>
   </button>
 </div>
-<button id="helpToggle" title="Hilfe">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.2 9a2.8 2.8 0 0 1 5.4.9c0 1.9-2.4 2-2.4 3.6"/><circle cx="12" cy="17" r="0.6" fill="currentColor" stroke="none"/></svg>
+<button id="helpToggle" type="button" title="Hilfe &amp; Einstellungen" aria-label="Hilfe und Einstellungen öffnen">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.12 2.12-.06-.06A1.7 1.7 0 0 0 15.74 19a1.7 1.7 0 0 0-1.03 1.55V21h-3v-.45A1.7 1.7 0 0 0 10.68 19a1.7 1.7 0 0 0-1.88.34l-.06.06-2.12-2.12.06-.06A1.7 1.7 0 0 0 7 15.34a1.7 1.7 0 0 0-1.55-1.03H5v-3h.45A1.7 1.7 0 0 0 7 10.28 1.7 1.7 0 0 0 6.66 8.4l-.06-.06 2.12-2.12.06.06A1.7 1.7 0 0 0 10.66 6a1.7 1.7 0 0 0 1.03-1.55V4h3v.45A1.7 1.7 0 0 0 15.72 6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.12 2.12-.06.06A1.7 1.7 0 0 0 19.4 9.66a1.7 1.7 0 0 0 1.55 1.03H21v3h-.45A1.7 1.7 0 0 0 19.4 15Z"/></svg>
 </button>
-<button id="cloudToggle" data-state="local" title="Cloud-Synchronisierung" aria-label="Cloud-Synchronisierung öffnen">
-  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 18.5h10.7a4.3 4.3 0 0 0 .8-8.5A6.3 6.3 0 0 0 6.1 8.7a4.9 4.9 0 0 0 .4 9.8Z"/><path d="m9 13 3-3 3 3M12 10v6"/></svg>
-  <span class="cloud-dot"></span>
+<button id="cloudToggle" type="button" data-state="local" title="Cloud-Synchronisierung" aria-label="Cloud-Synchronisierung öffnen">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 18.5h10.7a4.3 4.3 0 0 0 .8-8.5A6.3 6.3 0 0 0 6.1 8.7a4.9 4.9 0 0 0 .4 9.8Z"/><path d="m9 13 3-3 3 3M12 10v6"/></svg>
+  <span class="cloud-dot" aria-hidden="true"></span>
 </button>
 <div id="cloudUpdateBanner" role="status" aria-live="polite">
   <span>Neue Elemente sind auf einem anderen Gerät verfügbar.</span>
@@ -2765,7 +2770,9 @@ DEFERRED / OUT OF SCOPE
       attention:'Neuer Cloud-Stand verfügbar',
       error:'Cloud-Synchronisierung prüfen'
     };
-    cloudToggle.title = label || titles[mode] || titles.local;
+    const statusText = label || titles[mode] || titles.local;
+    cloudToggle.title = statusText;
+    cloudToggle.setAttribute('aria-label', statusText + '. Cloud-Synchronisierung öffnen');
     if(cloudStatusLabel && label) cloudStatusLabel.textContent = label;
     if(cloudRevisionLabel) cloudRevisionLabel.textContent = cloudRevision ? 'Rev. '+cloudRevision : 'Lokal';
   }
@@ -7017,6 +7024,16 @@ COPYBOARD V34.0 — PERSONAL CLOUD SYNC FOUNDATION
 - Optimistic revision checks prevent silent last-write-wins overwrites.
 - Clean devices auto-load newer revisions; dirty devices receive an explicit update prompt.
 - V33.6 remains fully compatible and untouched as the rollback version.
+-->
+
+<!--
+COPYBOARD V34.1 — UTILITY BUTTON ALIGNMENT
+
+- Settings/help and cloud sync now share the same 46 px circular utility-button geometry.
+- The former question-mark icon is replaced by a quiet 1.75 px outline gear.
+- Cloud state is communicated by icon color and the status dot, not by changing the button surface.
+- Tooltips, accessible names and a visible keyboard focus remain explicit.
+- V34.0 remains untouched as the rollback version.
 -->
 
 </body>
