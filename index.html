@@ -88,7 +88,7 @@
   </header>
 
   <main class="hero">
-    <input class="title-input" id="titleInput" maxlength="40" spellcheck="false">
+    <input class="title-input" id="titleInput" aria-label="Board-Titel" maxlength="40" spellcheck="false">
 
     <div class="dropzone hero" id="dropzone">
       <div class="dz-icon" id="dzIcon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-5 5M12 4l5 5"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
@@ -105,8 +105,8 @@
   </main>
 </div>
 
-<input type="file" id="fileInput" multiple>
-<div id="toast"></div>
+<input type="file" id="fileInput" aria-label="Dateien hinzufügen" multiple>
+<div id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <div id="dropLine"></div>
 <div id="dragHint">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
@@ -211,7 +211,7 @@
 <div class="overlay" id="folderOverlay" style="z-index:70;">
   <div class="modal folder-modal">
     <div class="folder-modal-header">
-      <input class="folder-title-input" id="folderTitleInput" maxlength="40">
+      <input class="folder-title-input" id="folderTitleInput" aria-label="Ordnername" maxlength="40">
       <button class="folder-header-btn ghost" id="folderZipBtn">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 19h16"/></svg> Herunterladen
       </button>
@@ -251,8 +251,8 @@
       <div class="inspector-grid" id="inspectorGrid"></div>
     </div>
     <div class="inspector-actions">
-      <button class="secondary" id="inspectorLocateBtn"></button>
-      <button class="primary" id="inspectorOpenBtn"></button>
+      <button class="secondary" id="inspectorLocateBtn" aria-label="Element im Board anzeigen"></button>
+      <button class="primary" id="inspectorOpenBtn" aria-label="Element öffnen"></button>
     </div>
   </div>
 </div>
@@ -280,7 +280,7 @@
 <div class="overlay" id="renameOverlay" style="z-index:78;">
   <div class="modal">
     <h3>Umbenennen</h3>
-    <input type="text" id="renameInput" maxlength="60" style="width:100%; border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-family:inherit; font-size:14px; color:var(--ink); margin-bottom:16px; box-sizing:border-box;">
+    <input type="text" id="renameInput" aria-label="Neuer Name" maxlength="60" style="width:100%; border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-family:inherit; font-size:14px; color:var(--ink); margin-bottom:16px; box-sizing:border-box;">
     <div class="modal-actions">
       <button class="modal-cancel" id="renameCancelBtn">Abbrechen</button>
       <button class="modal-confirm ok" id="renameOkBtn">Speichern</button>
@@ -288,13 +288,13 @@
   </div>
 </div>
 
-<input type="file" id="importFileInput" accept="application/json" style="display:none;">
-<input type="file" id="replaceFileInput" style="display:none;">
+<input type="file" id="importFileInput" aria-label="CopyBoard-Backup importieren" accept="application/json" style="display:none;">
+<input type="file" id="replaceFileInput" aria-label="Datei ersetzen" style="display:none;">
 
 <div class="overlay" id="pinOverlay" style="z-index:86;">
   <div class="modal" style="max-width:320px;">
     <h3 id="pinOverlayTitle">PIN eingeben</h3>
-    <input type="password" id="pinInput" maxlength="20" inputmode="numeric" autocomplete="off" style="width:100%; text-align:center; font-size:22px; letter-spacing:8px; border:1px solid var(--line); border-radius:10px; padding:12px; margin-bottom:10px; box-sizing:border-box; color:var(--ink);">
+    <input type="password" id="pinInput" aria-label="PIN" maxlength="20" inputmode="numeric" autocomplete="off" style="width:100%; text-align:center; font-size:22px; letter-spacing:8px; border:1px solid var(--line); border-radius:10px; padding:12px; margin-bottom:10px; box-sizing:border-box; color:var(--ink);">
     <p id="pinError" style="color:var(--danger); font-size:12px; text-align:center; margin:0 0 14px; display:none;">Falscher PIN</p>
     <div class="modal-actions">
       <button class="modal-cancel" id="pinCancelBtn">Abbrechen</button>
@@ -512,12 +512,12 @@
           <div class="help-setting-list">
             <div class="help-setting"><div class="help-setting-copy"><strong>AutoSave</strong><span id="helpAutosaveStatus">Status wird geladen</span></div><button class="help-action" id="helpAutosaveBtn">Umschalten</button></div>
             <div class="help-setting"><div class="help-setting-copy"><strong>Paste Capture</strong><span id="helpPasteStatus">Status wird geladen</span></div><button class="help-action" id="helpPasteBtn">Umschalten</button></div>
-            <div class="help-setting"><div class="help-setting-copy"><strong>Standardansicht</strong><span>Gilt für dieses Board und wird sofort angewendet.</span></div><select class="help-select" id="helpViewModeSelect"><option value="grid">Kacheln</option><option value="list">Liste</option></select></div>
-            <div class="help-setting"><div class="help-setting-copy"><strong>Standardsortierung</strong><span>Wird für neu angelegte Spaces verwendet.</span></div><select class="help-select" id="helpDefaultSortSelect"><option value="manual">Manuell</option><option value="name">Name A–Z</option><option value="newest">Neueste zuerst</option><option value="oldest">Älteste zuerst</option><option value="size">Größe absteigend</option><option value="type">Dateityp</option></select></div>
-            <div class="help-setting"><div class="help-setting-copy"><strong>Verlaufslänge</strong><span>Maximale Anzahl unter „Zuletzt verwendet“.</span></div><select class="help-select" id="helpRecentLimitSelect"><option value="10">10 Einträge</option><option value="20">20 Einträge</option><option value="30">30 Einträge</option><option value="50">50 Einträge</option><option value="100">100 Einträge</option></select></div>
-            <div class="help-setting"><div class="help-setting-copy"><strong>Space-Atmosphäre</strong><span>Stärke der farbigen Hintergrundtönung des aktiven Spaces.</span></div><select class="help-select" id="helpAtmosphereSelect"><option value="off">Aus</option><option value="subtle">Dezent</option><option value="strong">Kräftiger</option></select></div>
-            <div class="help-setting"><div class="help-setting-copy"><strong>Start-Space</strong><span>Beim nächsten Öffnen den letzten oder den ersten Space anzeigen.</span></div><select class="help-select" id="helpStartSpaceSelect"><option value="last">Zuletzt verwendet</option><option value="first">Erster Space</option></select></div>
-            <div class="help-setting"><div class="help-setting-copy"><strong>Löschbestätigungen</strong><span>Vor Löschen und Leeren nochmals nachfragen.</span></div><select class="help-select" id="helpConfirmDeleteSelect"><option value="on">Immer nachfragen</option><option value="off">Direkt ausführen</option></select></div>
+            <div class="help-setting"><div class="help-setting-copy"><strong>Standardansicht</strong><span>Gilt für dieses Board und wird sofort angewendet.</span></div><select class="help-select" id="helpViewModeSelect" aria-label="Standardansicht"><option value="grid">Kacheln</option><option value="list">Liste</option></select></div>
+            <div class="help-setting"><div class="help-setting-copy"><strong>Standardsortierung</strong><span>Wird für neu angelegte Spaces verwendet.</span></div><select class="help-select" id="helpDefaultSortSelect" aria-label="Standardsortierung"><option value="manual">Manuell</option><option value="name">Name A–Z</option><option value="newest">Neueste zuerst</option><option value="oldest">Älteste zuerst</option><option value="size">Größe absteigend</option><option value="type">Dateityp</option></select></div>
+            <div class="help-setting"><div class="help-setting-copy"><strong>Verlaufslänge</strong><span>Maximale Anzahl unter „Zuletzt verwendet“.</span></div><select class="help-select" id="helpRecentLimitSelect" aria-label="Verlaufslänge"><option value="10">10 Einträge</option><option value="20">20 Einträge</option><option value="30">30 Einträge</option><option value="50">50 Einträge</option><option value="100">100 Einträge</option></select></div>
+            <div class="help-setting"><div class="help-setting-copy"><strong>Space-Atmosphäre</strong><span>Stärke der farbigen Hintergrundtönung des aktiven Spaces.</span></div><select class="help-select" id="helpAtmosphereSelect" aria-label="Space-Atmosphäre"><option value="off">Aus</option><option value="subtle">Dezent</option><option value="strong">Kräftiger</option></select></div>
+            <div class="help-setting"><div class="help-setting-copy"><strong>Start-Space</strong><span>Beim nächsten Öffnen den letzten oder den ersten Space anzeigen.</span></div><select class="help-select" id="helpStartSpaceSelect" aria-label="Start-Space"><option value="last">Zuletzt verwendet</option><option value="first">Erster Space</option></select></div>
+            <div class="help-setting"><div class="help-setting-copy"><strong>Löschbestätigungen</strong><span>Vor Löschen und Leeren nochmals nachfragen.</span></div><select class="help-select" id="helpConfirmDeleteSelect" aria-label="Löschbestätigungen"><option value="on">Immer nachfragen</option><option value="off">Direkt ausführen</option></select></div>
             <div class="help-setting"><div class="help-setting-copy"><strong>Einstellungen sichern</strong><span>Nur Board-Einstellungen als kleine JSON-Datei exportieren oder importieren.</span></div><div class="help-action-row"><button class="help-action" id="helpExportSettingsBtn">Exportieren</button><button class="help-action" id="helpImportSettingsBtn">Importieren</button></div></div>
             <div class="help-setting"><div class="help-setting-copy"><strong>Einstellungen zurücksetzen</strong><span>Setzt ausschließlich Board-Einstellungen auf Standard. Inhalte bleiben vollständig erhalten.</span></div><button class="help-action" id="helpResetSettingsBtn">Zurücksetzen</button></div>
             <div class="help-setting"><div class="help-setting-copy"><strong>Weitere Befehle</strong><span>Sortierung, Backup, Import und Navigation.</span></div><button class="help-action primary" data-help-action="palette">Command Palette</button></div>
