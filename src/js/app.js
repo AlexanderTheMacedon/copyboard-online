@@ -90,20 +90,6 @@
   const MAX_IMPORT_FILE_BYTES = 30 * 1024 * 1024;
   const PERSIST_DEBOUNCE_MS = 140;
 
-  const EXT_GROUPS = {
-    pdf:['#fdecec','#c0392b'], doc:['#eaf1ff','#2f5bff'], docx:['#eaf1ff','#2f5bff'],
-    xls:['#e9f8ef','#1e8e5a'], xlsx:['#e9f8ef','#1e8e5a'], csv:['#e9f8ef','#1e8e5a'],
-    ppt:['#fff2e0','#c9720a'], pptx:['#fff2e0','#c9720a'],
-    zip:['#f2eefc','#7c4fd6'], rar:['#f2eefc','#7c4fd6'], '7z':['#f2eefc','#7c4fd6'], tar:['#f2eefc','#7c4fd6'], gz:['#f2eefc','#7c4fd6'],
-    mp3:['#fdeef7','#c02579'], wav:['#fdeef7','#c02579'], m4a:['#fdeef7','#c02579'],
-    mp4:['#fdeef7','#c02579'], mov:['#fdeef7','#c02579'], avi:['#fdeef7','#c02579'], mkv:['#fdeef7','#c02579'], webm:['#fdeef7','#c02579'],
-    json:['#eefaf4','#0f9d68'], xml:['#eefaf4','#0f9d68'], yml:['#eefaf4','#0f9d68'], yaml:['#eefaf4','#0f9d68'],
-    ini:['#f4f5f7','#6b7280'], cfg:['#f4f5f7','#6b7280'], conf:['#f4f5f7','#6b7280'], env:['#f4f5f7','#6b7280'], log:['#f4f5f7','#6b7280'],
-    js:['#fff9e0','#a3790a'], ts:['#fff9e0','#a3790a'], py:['#fff9e0','#a3790a'], html:['#fff9e0','#a3790a'], css:['#fff9e0','#a3790a'],
-    java:['#fff9e0','#a3790a'], c:['#fff9e0','#a3790a'], cpp:['#fff9e0','#a3790a'], sh:['#fff9e0','#a3790a'], go:['#fff9e0','#a3790a'], rs:['#fff9e0','#a3790a'], rb:['#fff9e0','#a3790a'],
-    txt:['#f4f5f7','#6b7280'], md:['#f4f5f7','#6b7280'], rtf:['#f4f5f7','#6b7280'],
-    svg:['#eaf1ff','#2f5bff'], ai:['#eaf1ff','#2f5bff'], psd:['#eaf1ff','#2f5bff'], fig:['#eaf1ff','#2f5bff'], sketch:['#eaf1ff','#2f5bff']
-  };
   /*
    * V32 SETTINGS ARCHITECTURE
    * - SETTINGS_REGISTRY is the canonical definition list.
